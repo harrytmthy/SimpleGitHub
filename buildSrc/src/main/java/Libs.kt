@@ -37,6 +37,7 @@ object Libs {
     const val LIFECYCLE_LIVEDATA_KTX = "androidx.lifecycle:lifecycle-livedata-ktx"
     const val LIFECYCLE_VIEWMODEL_KTX = "androidx.lifecycle:lifecycle-viewmodel-ktx"
     const val MATERIAL = "com.google.android.material:material"
+    const val MULTIDEX = "androidx.multidex:multidex"
     const val MOCKITO_CORE = "org.mockito:mockito-core"
     const val MOCKITO_KOTLIN = "com.nhaarman.mockitokotlin2:mockito-kotlin"
     const val RECYCLERVIEW = "androidx.recyclerview:recyclerview"
@@ -44,6 +45,7 @@ object Libs {
     const val ROOM_COMPILER = "androidx.room:room-compiler"
     const val ROOM_KTX = "androidx.room:room-ktx"
     const val ROOM_RUNTIME = "androidx.room:room-runtime"
+    const val RX_BINDING = "com.jakewharton.rxbinding4:rxbinding"
     const val SERIALIZATION = "org.jetbrains.kotlinx:kotlinx-serialization-core"
     const val SERIALIZATION_CONVERTER
         = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter"

@@ -50,9 +50,11 @@ android {
         getByName("release") {
             isMinifyEnabled = true
             isShrinkResources = true
+            multiDexEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
         getByName("debug") {
+            multiDexEnabled = true
             versionNameSuffix = "-debug"
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }

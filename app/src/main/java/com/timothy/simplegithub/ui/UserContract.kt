@@ -14,12 +14,25 @@
  * limitations under the License.
  */
 
-package com.timothy.simplegithub.ui.ext
+package com.timothy.simplegithub.ui
 
-import android.app.Activity
-import android.view.LayoutInflater
-import androidx.viewbinding.ViewBinding
+import androidx.lifecycle.LiveData
+import com.timothy.simplegithub.ui.model.UserModel
+import io.reactivex.rxjava3.core.Observable
 
-fun <T : ViewBinding> Activity.viewBinding(inflater: (LayoutInflater) -> T) = lazy {
-    inflater.invoke(layoutInflater)
+interface UserContract {
+
+    sealed class State {
+        data class Success(val data: UserModel) : State()
+        data class Error(val message: String) : State()
+    }
+
+    interface Presenter {
+        val state: LiveData<State>
+        fun observeTextChanges(textChangesObservable: Observable<String>)
+    }
+
+    interface View {
+        fun render(state: State)
+    }
 }

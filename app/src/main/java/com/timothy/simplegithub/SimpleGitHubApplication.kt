@@ -16,14 +16,14 @@
 
 package com.timothy.simplegithub
 
-import android.app.Application
 import android.os.StrictMode
+import androidx.multidex.MultiDexApplication
 import androidx.viewbinding.BuildConfig
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
 @HiltAndroidApp
-class SimpleGitHubApplication : Application() {
+class SimpleGitHubApplication : MultiDexApplication() {
 
     override fun onCreate() {
         setupStrictMode()
