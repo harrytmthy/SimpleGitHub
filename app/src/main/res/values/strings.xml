@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">SimpleGitHub</string>
+    <string name="user_search_hint">Search GitHub User</string>
+</resources>
