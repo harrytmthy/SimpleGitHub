@@ -14,26 +14,26 @@
  * limitations under the License.
  */
 
-package com.timothy.simplegithub.ui
+package com.timothy.simplegithub.domain.di
 
-import androidx.lifecycle.LiveData
-import com.timothy.simplegithub.ui.model.UserModel
-import io.reactivex.rxjava3.core.Observable
+import javax.inject.Qualifier
 
-interface UserContract {
+@Retention(AnnotationRetention.BINARY)
+@Qualifier
+annotation class DefaultDispatcher
 
-    sealed class State {
-        data class Success(val data: List<UserModel>) : State()
-        data class Error(val message: String) : State()
-    }
+@Retention(AnnotationRetention.BINARY)
+@Qualifier
+annotation class IoDispatcher
 
-    interface Presenter {
-        val state: LiveData<State>
-        fun observeTextChanges(textChangesObservable: Observable<String>)
-        fun loadNextPage()
-    }
+@Retention(AnnotationRetention.BINARY)
+@Qualifier
+annotation class MainDispatcher
 
-    interface View {
-        fun render(state: State)
-    }
-}
+@Retention(AnnotationRetention.BINARY)
+@Qualifier
+annotation class MainImmediateDispatcher
+
+@Retention(AnnotationRetention.BINARY)
+@Qualifier
+annotation class ApplicationScope

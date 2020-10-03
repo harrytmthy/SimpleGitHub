@@ -14,26 +14,19 @@
  * limitations under the License.
  */
 
-package com.timothy.simplegithub.ui
+package com.timothy.simplegithub.domain.internal
 
-import androidx.lifecycle.LiveData
-import com.timothy.simplegithub.ui.model.UserModel
-import io.reactivex.rxjava3.core.Observable
+import android.os.Handler
+import android.os.Looper
 
-interface UserContract {
+class SimpleGitHubMainHandler : SimpleGitHubHandler {
 
-    sealed class State {
-        data class Success(val data: List<UserModel>) : State()
-        data class Error(val message: String) : State()
-    }
+    private val handler = Handler(Looper.getMainLooper())
 
-    interface Presenter {
-        val state: LiveData<State>
-        fun observeTextChanges(textChangesObservable: Observable<String>)
-        fun loadNextPage()
-    }
+    override fun post(runnable: Runnable) = handler.post(runnable)
 
-    interface View {
-        fun render(state: State)
-    }
+    override fun postDelayed(runnable: Runnable, millis: Long) =
+        handler.postDelayed(runnable, millis)
+
+    override fun removeCallbacks(runnable: Runnable) = handler.removeCallbacks(runnable)
 }

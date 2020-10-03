@@ -28,6 +28,7 @@ object Dependencies {
         Dependency.Implementation(Libs.LIFECYCLE_VIEWMODEL_KTX, Versions.LIFECYCLE),
         Dependency.Implementation(Libs.MATERIAL, Versions.MATERIAL),
         Dependency.Implementation(Libs.MULTIDEX, Versions.MULTIDEX),
+        Dependency.Implementation(Libs.OKHTTP, Versions.OKHTTP),
         Dependency.Implementation(Libs.RECYCLERVIEW, Versions.RECYCLERVIEW),
         Dependency.Implementation(Libs.RETROFIT, Versions.RETROFIT),
         Dependency.Implementation(Libs.ROOM_RUNTIME, Versions.ROOM),

@@ -24,7 +24,7 @@ object Versions {
     const val BUILD_TOOLS = "30.0.1"
 
     const val ANDROID_GRADLE = "4.0.1"
-    const val KOTLIN = "1.4.0"
+    const val KOTLIN = "1.4.10"
 
     const val APPCOMPAT = "1.2.0"
     const val CONSTRAINT_LAYOUT = "1.1.3"
@@ -40,12 +40,13 @@ object Versions {
     const val MOCKITO_CORE = "3.5.2"
     const val MOCKITO_KOTLIN = "2.2.0"
     const val MULTIDEX = "2.0.1"
+    const val OKHTTP = "4.9.0"
     const val RECYCLERVIEW = "1.2.0-alpha05"
     const val RETROFIT = "2.9.0"
     const val ROOM = "2.3.0-alpha02"
     const val RX_BINDING = "4.0.0"
     const val SERIALIZATION = "1.0.0-RC"
-    const val SERIALIZATION_CONVERTER = "0.6.0"
+    const val SERIALIZATION_CONVERTER = "0.7.0"
     const val SPOTLESS = "5.1.1"
     const val TIMBER = "4.7.1"
 }

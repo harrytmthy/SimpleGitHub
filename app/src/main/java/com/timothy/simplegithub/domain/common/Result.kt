@@ -14,26 +14,23 @@
  * limitations under the License.
  */
 
-package com.timothy.simplegithub.ui
+package com.timothy.simplegithub.domain.common
 
-import androidx.lifecycle.LiveData
-import com.timothy.simplegithub.ui.model.UserModel
-import io.reactivex.rxjava3.core.Observable
+/**
+ * A generic class that holds a value with its loading status.
+ * @param <T>
+ */
+sealed class Result<out R> {
 
-interface UserContract {
+    object Loading : Result<Nothing>()
+    data class Success<out T : Any>(val data: T) : Result<T>()
+    data class Error(val exception: Exception) : Result<Nothing>()
 
-    sealed class State {
-        data class Success(val data: List<UserModel>) : State()
-        data class Error(val message: String) : State()
-    }
-
-    interface Presenter {
-        val state: LiveData<State>
-        fun observeTextChanges(textChangesObservable: Observable<String>)
-        fun loadNextPage()
-    }
-
-    interface View {
-        fun render(state: State)
+    override fun toString(): String {
+        return when (this) {
+            is Loading -> "Loading"
+            is Success<*> -> "Success[data=$data]"
+            is Error -> "Error[exception=$exception]"
+        }
     }
 }

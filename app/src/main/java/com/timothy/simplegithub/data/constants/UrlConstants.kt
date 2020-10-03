@@ -14,26 +14,13 @@
  * limitations under the License.
  */
 
-package com.timothy.simplegithub.ui
+package com.timothy.simplegithub.data.constants
 
-import androidx.lifecycle.LiveData
-import com.timothy.simplegithub.ui.model.UserModel
-import io.reactivex.rxjava3.core.Observable
+object UrlConstants {
 
-interface UserContract {
+    internal const val BASE_URL = "https://api.github.com"
 
-    sealed class State {
-        data class Success(val data: List<UserModel>) : State()
-        data class Error(val message: String) : State()
-    }
+    internal const val CONTENT_TYPE = "application/json"
 
-    interface Presenter {
-        val state: LiveData<State>
-        fun observeTextChanges(textChangesObservable: Observable<String>)
-        fun loadNextPage()
-    }
-
-    interface View {
-        fun render(state: State)
-    }
+    internal const val API_SEARCH = "$BASE_URL/search"
 }

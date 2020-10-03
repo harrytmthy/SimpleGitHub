@@ -40,6 +40,7 @@ object Libs {
     const val MULTIDEX = "androidx.multidex:multidex"
     const val MOCKITO_CORE = "org.mockito:mockito-core"
     const val MOCKITO_KOTLIN = "com.nhaarman.mockitokotlin2:mockito-kotlin"
+    const val OKHTTP = "com.squareup.okhttp3:okhttp"
     const val RECYCLERVIEW = "androidx.recyclerview:recyclerview"
     const val RETROFIT = "com.squareup.retrofit2:retrofit"
     const val ROOM_COMPILER = "androidx.room:room-compiler"
