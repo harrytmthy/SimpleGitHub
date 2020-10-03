@@ -16,9 +16,11 @@
 
 package com.timothy.simplegithub.data.di
 
+import com.timothy.simplegithub.data.UserDataRepository
 import com.timothy.simplegithub.data.source.UserDataSource
 import com.timothy.simplegithub.data.source.local.LocalUserDataSource
 import com.timothy.simplegithub.data.source.network.NetworkUserDataSource
+import com.timothy.simplegithub.domain.repository.UserRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -41,7 +43,5 @@ class UserSearchModule {
 
     @Provides
     @Singleton
-    fun provideLocationRepository(
-        locationDataRepository: LocationDataRepository
-    ): LocationRepository = locationDataRepository
+    fun provideUserRepository(repository: UserDataRepository): UserRepository = repository
 }
