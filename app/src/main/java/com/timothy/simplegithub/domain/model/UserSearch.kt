@@ -14,13 +14,9 @@
  * limitations under the License.
  */
 
-package com.timothy.simplegithub.data.constants
+package com.timothy.simplegithub.domain.model
 
-object UrlConstants {
-
-    internal const val BASE_URL = "https://api.github.com"
-
-    internal const val CONTENT_TYPE = "application/json"
-
-    internal const val API_SEARCH_USER = "/search/users"
-}
+data class UserSearch(
+    val page: Int,
+    val users: List<User>
+)

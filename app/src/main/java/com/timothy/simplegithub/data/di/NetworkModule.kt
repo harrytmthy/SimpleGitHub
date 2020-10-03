@@ -19,6 +19,7 @@ package com.timothy.simplegithub.data.di
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.timothy.simplegithub.data.constants.UrlConstants.BASE_URL
 import com.timothy.simplegithub.data.constants.UrlConstants.CONTENT_TYPE
+import com.timothy.simplegithub.data.source.network.UserSearchFacade
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -48,4 +49,9 @@ class NetworkModule {
         .baseUrl(BASE_URL)
         .addConverterFactory(Json.asConverterFactory(CONTENT_TYPE.toMediaType()))
         .build()
+
+    @Provides
+    @Singleton
+    fun provideUserSearchFacade(retrofit: Retrofit): UserSearchFacade =
+        retrofit.create(UserSearchFacade::class.java)
 }

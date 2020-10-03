@@ -16,6 +16,8 @@
 
 package com.timothy.simplegithub.ui.di
 
+import android.content.Context
+import com.timothy.simplegithub.data.db.AppDatabase
 import com.timothy.simplegithub.domain.di.ApplicationScope
 import com.timothy.simplegithub.domain.di.DefaultDispatcher
 import com.timothy.simplegithub.domain.di.MainThreadHandler
@@ -25,6 +27,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
@@ -45,4 +48,9 @@ class AppModule {
     @Provides
     @MainThreadHandler
     fun provideMainThreadHandler(): SimpleGitHubHandler = SimpleGitHubMainHandler()
+
+    @Singleton
+    @Provides
+    fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase =
+        AppDatabase.buildDatabase(context)
 }

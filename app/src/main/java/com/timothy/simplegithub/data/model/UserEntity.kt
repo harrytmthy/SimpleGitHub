@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-package com.timothy.simplegithub.data.constants
+package com.timothy.simplegithub.data.model
 
-object UrlConstants {
+import androidx.room.Entity
+import androidx.room.Fts4
 
-    internal const val BASE_URL = "https://api.github.com"
-
-    internal const val CONTENT_TYPE = "application/json"
-
-    internal const val API_SEARCH_USER = "/search/users"
-}
+@Entity
+@Fts4
+data class UserEntity(
+    val avatarUrl: String,
+    val username: String
+)

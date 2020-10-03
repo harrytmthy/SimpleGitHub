@@ -14,13 +14,17 @@
  * limitations under the License.
  */
 
-package com.timothy.simplegithub.data.constants
+package com.timothy.simplegithub.data.source.network
 
-object UrlConstants {
+import com.timothy.simplegithub.data.constants.UrlConstants.API_SEARCH_USER
+import com.timothy.simplegithub.data.source.network.request.UserSearchRequest
+import com.timothy.simplegithub.data.source.network.response.UserSearchResponse
+import kotlinx.coroutines.flow.Flow
+import retrofit2.http.GET
+import retrofit2.http.QueryMap
 
-    internal const val BASE_URL = "https://api.github.com"
+interface UserSearchFacade {
 
-    internal const val CONTENT_TYPE = "application/json"
-
-    internal const val API_SEARCH_USER = "/search/users"
+    @GET(API_SEARCH_USER)
+    fun searchUser(@QueryMap request: UserSearchRequest): Flow<UserSearchResponse>
 }

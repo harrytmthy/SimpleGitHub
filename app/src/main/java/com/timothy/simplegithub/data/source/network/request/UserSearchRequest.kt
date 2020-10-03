@@ -14,13 +14,18 @@
  * limitations under the License.
  */
 
-package com.timothy.simplegithub.data.constants
+package com.timothy.simplegithub.data.source.network.request
 
-object UrlConstants {
+import kotlinx.serialization.SerialName
 
-    internal const val BASE_URL = "https://api.github.com"
+data class UserSearchRequest(
+    @SerialName("q") val query: String,
+    @SerialName("page") val pageNumber: Int = INITIAL_PAGE,
+    @SerialName("per_page") val pageSize: Int = DEFAULT_PAGE_SIZE
+) {
 
-    internal const val CONTENT_TYPE = "application/json"
-
-    internal const val API_SEARCH_USER = "/search/users"
+    companion object {
+        private const val DEFAULT_PAGE_SIZE = 20
+        private const val INITIAL_PAGE = 1
+    }
 }

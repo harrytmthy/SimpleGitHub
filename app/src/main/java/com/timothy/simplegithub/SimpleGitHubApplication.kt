@@ -19,6 +19,7 @@ package com.timothy.simplegithub
 import android.os.StrictMode
 import androidx.multidex.MultiDexApplication
 import androidx.viewbinding.BuildConfig
+import com.jakewharton.threetenabp.AndroidThreeTen
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
@@ -29,6 +30,7 @@ class SimpleGitHubApplication : MultiDexApplication() {
         setupStrictMode()
         super.onCreate()
         setupTimber()
+        AndroidThreeTen.init(this)
     }
 
     private fun setupStrictMode() {

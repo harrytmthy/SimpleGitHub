@@ -36,6 +36,7 @@ object Dependencies {
         Dependency.Implementation(Libs.RX_BINDING, Versions.RX_BINDING),
         Dependency.Implementation(Libs.SERIALIZATION, Versions.SERIALIZATION),
         Dependency.Implementation(Libs.SERIALIZATION_CONVERTER, Versions.SERIALIZATION_CONVERTER),
+        Dependency.Implementation(Libs.THREETENABP, Versions.THREETENABP),
         Dependency.Implementation(Libs.TIMBER, Versions.TIMBER),
         Dependency.Kapt(Libs.GLIDE_COMPILER, Versions.GLIDE),
         Dependency.Kapt(Libs.HILT_COMPILER, Versions.HILT),

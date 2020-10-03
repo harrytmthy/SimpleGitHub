@@ -50,5 +50,6 @@ object Libs {
     const val SERIALIZATION = "org.jetbrains.kotlinx:kotlinx-serialization-core"
     const val SERIALIZATION_CONVERTER
         = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter"
+    const val THREETENABP = "com.jakewharton.threetenabp:threetenabp"
     const val TIMBER = "com.jakewharton.timber:timber"
 }

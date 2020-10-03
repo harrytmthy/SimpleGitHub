@@ -14,13 +14,20 @@
  * limitations under the License.
  */
 
-package com.timothy.simplegithub.data.constants
+package com.timothy.simplegithub.data.db
 
-object UrlConstants {
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import com.timothy.simplegithub.data.model.UserSearchEntity
 
-    internal const val BASE_URL = "https://api.github.com"
+@Dao
+interface UserSearchDao {
 
-    internal const val CONTENT_TYPE = "application/json"
+    @Query("SELECT * FROM UserSearchEntity WHERE `query` MATCH :query AND page MATCH :page")
+    fun getUserSearchResult(query: String, page: Int): List<UserSearchEntity>
 
-    internal const val API_SEARCH_USER = "/search/users"
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAll(userSearches: List<UserSearchEntity>)
 }

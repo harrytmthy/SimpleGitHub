@@ -20,7 +20,7 @@ import javax.inject.Qualifier
 
 @Retention(AnnotationRetention.BINARY)
 @Qualifier
-annotation class Database
+annotation class Local
 
 @Retention(AnnotationRetention.BINARY)
 @Qualifier

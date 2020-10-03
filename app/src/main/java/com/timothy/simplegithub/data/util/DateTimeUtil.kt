@@ -14,13 +14,16 @@
  * limitations under the License.
  */
 
-package com.timothy.simplegithub.data.constants
+package com.timothy.simplegithub.data.util
 
-object UrlConstants {
+import org.threeten.bp.Duration
+import org.threeten.bp.Instant
 
-    internal const val BASE_URL = "https://api.github.com"
+object DateTimeUtil {
 
-    internal const val CONTENT_TYPE = "application/json"
+    fun getCurrentMillis() = Instant.now().toEpochMilli()
 
-    internal const val API_SEARCH_USER = "/search/users"
+    fun isPassedFiveMinutes(millis: Long) = Duration.ofMillis(getCurrentMillis())
+        .minusMillis(millis)
+        .toMinutes() >= 5L
 }

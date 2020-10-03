@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.timothy.simplegithub.data.constants
+package com.timothy.simplegithub.data.source
 
-object UrlConstants {
+import com.timothy.simplegithub.data.model.UserSearchEntity
+import com.timothy.simplegithub.data.source.network.request.UserSearchRequest
+import kotlinx.coroutines.flow.Flow
 
-    internal const val BASE_URL = "https://api.github.com"
+interface UserDataSource {
 
-    internal const val CONTENT_TYPE = "application/json"
-
-    internal const val API_SEARCH_USER = "/search/users"
+    fun searchUser(request: UserSearchRequest): Flow<UserSearchEntity>
 }

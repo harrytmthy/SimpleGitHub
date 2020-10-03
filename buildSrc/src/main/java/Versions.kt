@@ -48,5 +48,6 @@ object Versions {
     const val SERIALIZATION = "1.0.0-RC"
     const val SERIALIZATION_CONVERTER = "0.7.0"
     const val SPOTLESS = "5.1.1"
+    const val THREETENABP = "1.2.4"
     const val TIMBER = "4.7.1"
 }

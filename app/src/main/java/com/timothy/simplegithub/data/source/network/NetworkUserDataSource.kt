@@ -14,13 +14,17 @@
  * limitations under the License.
  */
 
-package com.timothy.simplegithub.data.constants
+package com.timothy.simplegithub.data.source.network
 
-object UrlConstants {
+import com.timothy.simplegithub.data.source.UserDataSource
+import com.timothy.simplegithub.data.source.network.request.UserSearchRequest
+import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-    internal const val BASE_URL = "https://api.github.com"
+class NetworkUserDataSource @Inject constructor(
+    private val userSearchFacade: UserSearchFacade
+) : UserDataSource {
 
-    internal const val CONTENT_TYPE = "application/json"
-
-    internal const val API_SEARCH_USER = "/search/users"
+    override fun searchUser(request: UserSearchRequest) = userSearchFacade.searchUser(request)
+        .map { it.toUserEntity(request.query, request.pageNumber) }
 }
