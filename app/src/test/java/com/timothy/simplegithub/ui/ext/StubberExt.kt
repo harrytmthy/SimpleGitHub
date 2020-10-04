@@ -14,15 +14,14 @@
  * limitations under the License.
  */
 
-package com.timothy.simplegithub.ui.model
+package com.timothy.simplegithub.ui.ext
 
-import com.timothy.simplegithub.domain.model.UserSearch
+import com.nhaarman.mockitokotlin2.doAnswer
 
-data class UserModel(val avatarUrl: String, val username: String) {
+fun <T> doOnSuccessAnswer(data: T) = doAnswer {
+    it.getArgument<(T) -> Unit>(2).invoke(data)
+}
 
-    companion object {
-        fun from(userSearch: UserSearch) = userSearch.users.map {
-            UserModel(it.avatarUrl, it.username)
-        }
-    }
+fun doOnErrorAnswer(e: Throwable) = doAnswer {
+    it.getArgument<(Throwable) -> Unit>(3).invoke(e)
 }

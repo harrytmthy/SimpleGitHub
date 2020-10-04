@@ -31,6 +31,6 @@ class FakeUserRepository : UserRepository {
             User("http://img.com/3.jpg", "valkyrae")
         )
 
-        private val USER_SEARCH = UserSearch(1, USERS)
+        val USER_SEARCH = UserSearch(1, USERS)
     }
 }

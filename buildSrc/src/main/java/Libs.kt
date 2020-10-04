@@ -20,6 +20,7 @@ object Libs {
     const val KOTLIN_GRADLE = "org.jetbrains.kotlin:kotlin-gradle-plugin"
 
     const val APPCOMPAT = "androidx.appcompat:appcompat"
+    const val ARCH_TESTING = "androidx.arch.core:core-testing"
     const val CONSTRAINT_LAYOUT = "androidx.constraintlayout:constraintlayout"
     const val CORE_KTX = "androidx.core:core-ktx"
     const val COROUTINES = "org.jetbrains.kotlinx:kotlinx-coroutines-core"
@@ -40,6 +41,7 @@ object Libs {
     const val MATERIAL = "com.google.android.material:material"
     const val MULTIDEX = "androidx.multidex:multidex"
     const val MOCKITO_CORE = "org.mockito:mockito-core"
+    const val MOCKITO_INLINE = "org.mockito:mockito-inline"
     const val MOCKITO_KOTLIN = "com.nhaarman.mockitokotlin2:mockito-kotlin"
     const val OKHTTP = "com.squareup.okhttp3:okhttp"
     const val RECYCLERVIEW = "androidx.recyclerview:recyclerview"

@@ -14,15 +14,22 @@
  * limitations under the License.
  */
 
-package com.timothy.simplegithub.ui.model
+package com.timothy.simplegithub.ui.util
 
-import com.timothy.simplegithub.domain.model.UserSearch
+import androidx.lifecycle.Observer
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.core.IsEqual
 
-data class UserModel(val avatarUrl: String, val username: String) {
+class LiveDataTestObserver<T> : Observer<T> {
 
-    companion object {
-        fun from(userSearch: UserSearch) = userSearch.users.map {
-            UserModel(it.avatarUrl, it.username)
-        }
+    private val histories = mutableListOf<T>()
+
+    override fun onChanged(value: T) {
+        histories.add(value)
+    }
+
+    fun assertThatValueAt(index: Int, expectedValue: T): LiveDataTestObserver<T> {
+        assertThat(histories[index], IsEqual(expectedValue))
+        return this
     }
 }

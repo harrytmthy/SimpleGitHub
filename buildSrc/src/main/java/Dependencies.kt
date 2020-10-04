@@ -44,10 +44,12 @@ object Dependencies {
         Dependency.Kapt(Libs.HILT_COMPILER_KTX, Versions.HILT_KTX),
         Dependency.Kapt(Libs.LIFECYCLE_COMPILER, Versions.LIFECYCLE),
         Dependency.Kapt(Libs.ROOM_COMPILER, Versions.ROOM),
+        Dependency.TestImplementation(Libs.ARCH_TESTING, Versions.ARCH_TESTING),
         Dependency.TestImplementation(Libs.COROUTINES_TEST, Versions.COROUTINES),
         Dependency.TestImplementation(Libs.HILT_TESTING, Versions.HILT),
         Dependency.TestImplementation(Libs.JUNIT, Versions.JUNIT),
         Dependency.TestImplementation(Libs.MOCKITO_CORE, Versions.MOCKITO_CORE),
+        Dependency.TestImplementation(Libs.MOCKITO_INLINE, Versions.MOCKITO_CORE),
         Dependency.TestImplementation(Libs.MOCKITO_KOTLIN, Versions.MOCKITO_KOTLIN)
     )
 

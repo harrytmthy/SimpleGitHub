@@ -34,7 +34,7 @@ class UserDataRepositoryTest : UserDataRepositoryTestTemplate() {
     }
 
     @Test
-    fun `searchUser without local on expired timestamp result should return data from network`() = runBlockingTest {
+    fun `searchUser without local result on expired timestamp should return data from network`() = runBlockingTest {
         givenUserDataRepository(
             localHasResult = false,
             networkHasResult = true,

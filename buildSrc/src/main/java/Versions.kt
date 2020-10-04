@@ -27,6 +27,7 @@ object Versions {
     const val KOTLIN = "1.4.10"
 
     const val APPCOMPAT = "1.2.0"
+    const val ARCH_TESTING = "2.1.0"
     const val CONSTRAINT_LAYOUT = "1.1.3"
     const val CORE_KTX = "1.5.0-alpha02"
     const val COROUTINES = "1.3.9"
@@ -38,7 +39,7 @@ object Versions {
     const val KT_LINT = "0.37.2"
     const val LIFECYCLE = "2.2.0"
     const val MATERIAL = "1.2.0"
-    const val MOCKITO_CORE = "3.5.2"
+    const val MOCKITO_CORE = "3.5.13"
     const val MOCKITO_KOTLIN = "2.2.0"
     const val MULTIDEX = "2.0.1"
     const val OKHTTP = "4.9.0"

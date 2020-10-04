@@ -23,12 +23,13 @@ import io.reactivex.rxjava3.core.Observable
 interface UserContract {
 
     sealed class State {
+        object Loading : State()
         data class Success(val data: List<UserModel>) : State()
-        data class Error(val message: String) : State()
+        data class Error(val message: String = "") : State()
     }
 
     interface Presenter {
-        val state: LiveData<State>
+        fun getState(): LiveData<State>
         fun observeTextChanges(textChangesObservable: Observable<String>)
         fun loadNextPage()
     }

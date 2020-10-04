@@ -14,15 +14,21 @@
  * limitations under the License.
  */
 
-package com.timothy.simplegithub.ui.model
+package com.timothy.simplegithub.common
 
-import com.timothy.simplegithub.domain.model.UserSearch
+import androidx.lifecycle.ViewModel
+import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.disposables.Disposable
 
-data class UserModel(val avatarUrl: String, val username: String) {
+abstract class RxLifecycleAwarePresenter : ViewModel() {
 
-    companion object {
-        fun from(userSearch: UserSearch) = userSearch.users.map {
-            UserModel(it.avatarUrl, it.username)
-        }
+    private val disposables = CompositeDisposable()
+
+    protected fun launch(action: () -> Disposable) {
+        disposables.add(action())
+    }
+
+    override fun onCleared() {
+        disposables.clear()
     }
 }
