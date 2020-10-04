@@ -36,8 +36,6 @@ class UserPresenter @Inject constructor(
     private var currentPage = 1
 
     private var currentQuery = ""
-    
-    override fun getState() = state
 
     override fun observeTextChanges(textChangesObservable: Observable<String>) = launch {
         textChangesObservable.subscribe(::searchUserByQuery)

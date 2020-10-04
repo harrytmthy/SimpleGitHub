@@ -16,7 +16,6 @@
 
 package com.timothy.simplegithub.ui
 
-import androidx.lifecycle.LiveData
 import com.timothy.simplegithub.ui.model.UserModel
 import io.reactivex.rxjava3.core.Observable
 
@@ -29,7 +28,6 @@ interface UserContract {
     }
 
     interface Presenter {
-        fun getState(): LiveData<State>
         fun observeTextChanges(textChangesObservable: Observable<String>)
         fun loadNextPage()
     }
