@@ -14,13 +14,18 @@
  * limitations under the License.
  */
 
-package com.timothy.simplegithub.data.source.network.response
+package com.timothy.simplegithub.data.source
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.timothy.simplegithub.data.model.UserSearchEntity
+import com.timothy.simplegithub.data.source.network.request.UserSearchRequest
 
-@Serializable
-data class UserResponse(
-    @SerialName("avatar_url") val avatarUrl: String,
-    @SerialName("login") val username: String
-)
+class FakeUserDataSource(private val userSearchEntity: UserSearchEntity) : UserDataSource {
+
+    var userSearchCached = false
+
+    override fun searchUser(request: UserSearchRequest) = userSearchEntity
+
+    override fun cacheUserSearch(userSearch: UserSearchEntity) {
+        userSearchCached = true
+    }
+}

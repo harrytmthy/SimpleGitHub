@@ -19,12 +19,11 @@ package com.timothy.simplegithub.data.source.network
 import com.timothy.simplegithub.data.constants.UrlConstants.API_SEARCH_USER
 import com.timothy.simplegithub.data.source.network.request.UserSearchRequest
 import com.timothy.simplegithub.data.source.network.response.UserSearchResponse
-import kotlinx.coroutines.flow.Flow
 import retrofit2.http.GET
 import retrofit2.http.QueryMap
 
 interface UserSearchFacade {
 
     @GET(API_SEARCH_USER)
-    fun searchUser(@QueryMap request: UserSearchRequest): Flow<UserSearchResponse>
+    fun searchUser(@QueryMap request: UserSearchRequest): UserSearchResponse
 }

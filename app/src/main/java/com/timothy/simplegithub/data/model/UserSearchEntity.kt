@@ -18,13 +18,26 @@ package com.timothy.simplegithub.data.model
 
 import androidx.room.Entity
 import androidx.room.Fts4
+import androidx.room.TypeConverters
+import com.timothy.simplegithub.data.converter.UserEntityConverter
 import com.timothy.simplegithub.data.util.DateTimeUtil
+import com.timothy.simplegithub.domain.model.UserSearch
 
 @Entity
 @Fts4
+@TypeConverters(UserEntityConverter::class)
 data class UserSearchEntity(
     val query: String,
     val page: Int,
     val timestamp: Long = DateTimeUtil.getCurrentMillis(),
     val result: List<UserEntity> = emptyList()
-)
+) {
+
+    fun shouldLoadNewData() =
+        DateTimeUtil.isPassedFiveMinutes(timestamp) || (result.isEmpty() && page == 1)
+
+    fun toUserSearch() = UserSearch(
+        page = page,
+        users = result.map { it.toUser() }
+    )
+}

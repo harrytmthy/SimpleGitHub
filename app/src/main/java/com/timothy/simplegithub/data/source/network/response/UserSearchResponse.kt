@@ -20,7 +20,9 @@ import com.timothy.simplegithub.data.model.UserEntity
 import com.timothy.simplegithub.data.model.UserSearchEntity
 import com.timothy.simplegithub.data.util.DateTimeUtil
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class UserSearchResponse(
     @SerialName("total_count") val totalCount: Long,
     @SerialName("incomplete_results") val incomplete: Boolean,

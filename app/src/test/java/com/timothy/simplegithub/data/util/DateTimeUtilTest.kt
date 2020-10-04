@@ -23,19 +23,25 @@ class DateTimeUtilTest {
 
     @Test
     fun `isPassedFiveMinutes with past millis should return true`() {
+        // Given
         val pastMillis = 10000000L
 
+        // When
         val result = DateTimeUtil.isPassedFiveMinutes(pastMillis)
 
+        // Then
         assertEquals(true, result)
     }
 
     @Test
     fun `isPassedFiveMinutes with current millis should return true`() {
+        // Given
         val currentMillis = System.currentTimeMillis()
 
+        // When
         val result = DateTimeUtil.isPassedFiveMinutes(currentMillis)
 
+        // Then
         assertEquals(false, result)
     }
 }

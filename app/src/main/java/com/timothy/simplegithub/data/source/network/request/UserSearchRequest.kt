@@ -17,7 +17,9 @@
 package com.timothy.simplegithub.data.source.network.request
 
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class UserSearchRequest(
     @SerialName("q") val query: String,
     @SerialName("page") val pageNumber: Int = INITIAL_PAGE,

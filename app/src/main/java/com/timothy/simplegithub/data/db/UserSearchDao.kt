@@ -29,5 +29,5 @@ interface UserSearchDao {
     fun getUserSearchResult(query: String, page: Int): List<UserSearchEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(userSearches: List<UserSearchEntity>)
+    fun insert(userSearch: UserSearchEntity)
 }

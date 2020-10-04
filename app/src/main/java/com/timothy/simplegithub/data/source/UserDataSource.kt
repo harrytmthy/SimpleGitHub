@@ -18,9 +18,10 @@ package com.timothy.simplegithub.data.source
 
 import com.timothy.simplegithub.data.model.UserSearchEntity
 import com.timothy.simplegithub.data.source.network.request.UserSearchRequest
-import kotlinx.coroutines.flow.Flow
 
 interface UserDataSource {
 
-    fun searchUser(request: UserSearchRequest): Flow<UserSearchEntity>
+    fun searchUser(request: UserSearchRequest): UserSearchEntity
+
+    fun cacheUserSearch(userSearch: UserSearchEntity) { /* default implementation */ }
 }

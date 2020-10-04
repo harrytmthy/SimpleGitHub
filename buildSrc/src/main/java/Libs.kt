@@ -26,6 +26,7 @@ object Libs {
     const val COROUTINES_TEST = "org.jetbrains.kotlinx:kotlinx-coroutines-test"
     const val GLIDE = "com.github.bumptech.glide:glide"
     const val GLIDE_COMPILER = "com.github.bumptech.glide:compiler"
+    const val HAMCREST = "org.hamcrest:hamcrest-library"
     const val HILT_ANDROID = "com.google.dagger:hilt-android"
     const val HILT_COMPILER = "com.google.dagger:hilt-android-compiler"
     const val HILT_COMPILER_KTX = "androidx.hilt:hilt-compiler"
@@ -47,7 +48,7 @@ object Libs {
     const val ROOM_KTX = "androidx.room:room-ktx"
     const val ROOM_RUNTIME = "androidx.room:room-runtime"
     const val RX_BINDING = "com.jakewharton.rxbinding4:rxbinding"
-    const val SERIALIZATION = "org.jetbrains.kotlinx:kotlinx-serialization-core"
+    const val SERIALIZATION = "org.jetbrains.kotlinx:kotlinx-serialization-json"
     const val SERIALIZATION_CONVERTER
         = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter"
     const val THREETENABP = "com.jakewharton.threetenabp:threetenabp"

@@ -20,9 +20,11 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.timothy.simplegithub.data.model.UserEntity
+import com.timothy.simplegithub.data.model.UserSearchEntity
 
 @Database(
-    entities = [UserSearchDao::class],
+    entities = [UserEntity::class, UserSearchEntity::class],
     exportSchema = false,
     version = 1
 )
@@ -31,10 +33,10 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun userSearchDao(): UserSearchDao
 
     companion object {
-        private const val databaseName = "simplegithub-db"
+        private const val DATABASE_NAME = "simplegithub-db"
 
         fun buildDatabase(context: Context): AppDatabase {
-            return Room.databaseBuilder(context, AppDatabase::class.java, databaseName)
+            return Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
                 .fallbackToDestructiveMigration()
                 .build()
         }

@@ -18,10 +18,16 @@ package com.timothy.simplegithub.data.model
 
 import androidx.room.Entity
 import androidx.room.Fts4
+import com.timothy.simplegithub.domain.model.User
+import kotlinx.serialization.Serializable
 
 @Entity
 @Fts4
+@Serializable
 data class UserEntity(
     val avatarUrl: String,
     val username: String
-)
+) {
+
+    fun toUser() = User(avatarUrl, username)
+}

@@ -19,3 +19,12 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-keepattributes *Annotation*, InnerClasses
+-dontnote kotlinx.serialization.SerializationKt
+-keep,includedescriptorclasses class com.timothy.simplegithub.**$$serializer { *; }
+-keepclassmembers class com.dietology.app.* {
+    *** Companion;
+}
+-keepclasseswithmembers class com.timothy.simplegithub.* {
+    kotlinx.serialization.KSerializer serializer(...);
+}

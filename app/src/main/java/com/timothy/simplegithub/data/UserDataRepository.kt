@@ -19,17 +19,32 @@ package com.timothy.simplegithub.data
 import com.timothy.simplegithub.data.di.Local
 import com.timothy.simplegithub.data.di.Network
 import com.timothy.simplegithub.data.source.UserDataSource
-import com.timothy.simplegithub.domain.model.UserSearch
+import com.timothy.simplegithub.data.source.network.request.UserSearchRequest
 import com.timothy.simplegithub.domain.repository.UserRepository
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class UserDataRepository @Inject constructor(
     @Local private val localUserDataSource: UserDataSource,
     @Network private val networkUserDataSource: UserDataSource
 ) : UserRepository {
 
-    override fun searchUser(page: Int): Flow<UserSearch> {
-        TODO("Not yet implemented")
-    }
+    override fun searchUser(query: String, page: Int) = flow {
+        val request = UserSearchRequest(query, page)
+        localUserDataSource.searchUser(request).run {
+            if (shouldLoadNewData()) {
+                emit(getUserSearchFromNetwork(request))
+            } else {
+                emit(this)
+            }
+        }
+    }.map { it.toUserSearch() }
+
+    private fun getUserSearchFromNetwork(request: UserSearchRequest) =
+        networkUserDataSource.searchUser(request).also {
+            localUserDataSource.cacheUserSearch(it)
+        }
 }

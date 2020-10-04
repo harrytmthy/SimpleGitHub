@@ -14,13 +14,19 @@
  * limitations under the License.
  */
 
-package com.timothy.simplegithub.data.source.network.response
+package com.timothy.simplegithub.data.converter
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import androidx.room.TypeConverter
+import com.timothy.simplegithub.data.model.UserEntity
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
-@Serializable
-data class UserResponse(
-    @SerialName("avatar_url") val avatarUrl: String,
-    @SerialName("login") val username: String
-)
+object UserEntityConverter {
+
+    @TypeConverter
+    fun jsonToUserEntities(jsonString: String) = Json.decodeFromString<List<UserEntity>>(jsonString)
+
+    @TypeConverter
+    fun userEntitiesToJson(userEntities: List<UserEntity>) = Json.encodeToString(userEntities)
+}

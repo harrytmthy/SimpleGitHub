@@ -21,6 +21,7 @@ object Dependencies {
         Dependency.Implementation(Libs.CORE_KTX, Versions.CORE_KTX),
         Dependency.Implementation(Libs.COROUTINES, Versions.COROUTINES),
         Dependency.Implementation(Libs.GLIDE, Versions.GLIDE),
+        Dependency.Implementation(Libs.HAMCREST, Versions.HAMCREST),
         Dependency.Implementation(Libs.HILT_ANDROID, Versions.HILT),
         Dependency.Implementation(Libs.HILT_VIEWMODEL, Versions.HILT_KTX),
         Dependency.Implementation(Libs.KOTLIN_STDLIB, Versions.KOTLIN),

@@ -27,6 +27,7 @@ buildscript {
         classpath(Dependencies.from(Libs.ANDROID_GRADLE, Versions.ANDROID_GRADLE))
         classpath(Dependencies.from(Libs.KOTLIN_GRADLE, Versions.KOTLIN))
         classpath(Dependencies.from(Libs.HILT_GRADLE, Versions.HILT))
+        classpath(kotlin("serialization", version = Versions.KOTLIN))
     }
 }
 

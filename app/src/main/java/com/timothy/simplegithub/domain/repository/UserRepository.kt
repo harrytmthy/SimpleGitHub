@@ -21,5 +21,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface UserRepository {
 
-    fun searchUser(page: Int): Flow<UserSearch>
+    fun searchUser(query: String, page: Int): Flow<UserSearch>
 }

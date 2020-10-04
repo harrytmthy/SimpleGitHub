@@ -18,7 +18,6 @@ package com.timothy.simplegithub.data.source.network
 
 import com.timothy.simplegithub.data.source.UserDataSource
 import com.timothy.simplegithub.data.source.network.request.UserSearchRequest
-import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class NetworkUserDataSource @Inject constructor(
@@ -26,5 +25,5 @@ class NetworkUserDataSource @Inject constructor(
 ) : UserDataSource {
 
     override fun searchUser(request: UserSearchRequest) = userSearchFacade.searchUser(request)
-        .map { it.toUserEntity(request.query, request.pageNumber) }
+        .toUserEntity(request.query, request.pageNumber)
 }

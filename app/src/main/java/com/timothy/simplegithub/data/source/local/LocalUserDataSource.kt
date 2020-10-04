@@ -20,19 +20,19 @@ import com.timothy.simplegithub.data.db.AppDatabase
 import com.timothy.simplegithub.data.model.UserSearchEntity
 import com.timothy.simplegithub.data.source.UserDataSource
 import com.timothy.simplegithub.data.source.network.request.UserSearchRequest
-import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class LocalUserDataSource @Inject constructor(
     private val database: AppDatabase
 ) : UserDataSource {
 
-    override fun searchUser(request: UserSearchRequest) = flow {
-        emit(queryCachedUserSearch(request.query, request.pageNumber))
+    override fun searchUser(request: UserSearchRequest) = with (request) {
+        database.userSearchDao()
+            .getUserSearchResult(query, pageNumber)
+            .firstOrNull()
+            ?: UserSearchEntity(query, pageNumber)
     }
 
-    private fun queryCachedUserSearch(query: String, page: Int) = database.userSearchDao()
-        .getUserSearchResult(query, page)
-        .firstOrNull()
-        ?: UserSearchEntity(query, page)
+    override fun cacheUserSearch(userSearch: UserSearchEntity) =
+        database.userSearchDao().insert(userSearch)
 }
