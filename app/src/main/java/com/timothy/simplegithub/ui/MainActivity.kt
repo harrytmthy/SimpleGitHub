@@ -18,17 +18,51 @@ package com.timothy.simplegithub.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import com.timothy.simplegithub.databinding.ActivityMainBinding
+import com.timothy.simplegithub.ui.UserContract.State
 import com.timothy.simplegithub.ui.ext.viewBinding
+import com.timothy.simplegithub.ui.model.UserModel
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), UserContract.View {
+
+    @Inject
+    lateinit var presenter: UserContract.Presenter
 
     private val binding by viewBinding(ActivityMainBinding::inflate)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        observeState()
+        observeTextChanges()
+    }
+
+    private fun observeState() = presenter.getState().observe(this, Observer(::render))
+
+    private fun observeTextChanges() = presenter.observeTextChanges(
+        binding.searchView.getTextChangesObservable()
+    )
+
+    override fun render(state: State) = when (state) {
+        is State.Empty -> renderEmptyState()
+        is State.Success -> renderSuccessState(state.data)
+        is State.Error -> renderErrorState(state.message)
+    }
+
+    private fun renderEmptyState() {
+        Timber.d("zzzzzzzzz: Empty")
+    }
+
+    private fun renderSuccessState(data: List<UserModel>) {
+        Timber.d("zzzzzzzzz: Success(size: ${data.size}")
+    }
+
+    private fun renderErrorState(message: String) {
+        Timber.d("zzzzzzzzz: Error(message: $message)")
     }
 }

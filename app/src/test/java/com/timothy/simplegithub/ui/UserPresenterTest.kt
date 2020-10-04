@@ -58,7 +58,7 @@ class UserPresenterTest {
     fun `observeTextChanges should emit success state`() {
         givenOnSuccessAnswer()
 
-        whenTextChangesIsObserved()
+        whenTextChangesIsObserved("pew")
 
         thenSuccessStateShouldBeEmitted()
     }
@@ -67,7 +67,7 @@ class UserPresenterTest {
     fun `observeTextChanges with exception should emit error state`() {
         givenOnErrorAnswer()
 
-        whenTextChangesIsObserved()
+        whenTextChangesIsObserved("pew")
 
         thenErrorStateShouldBeEmitted()
     }
@@ -90,21 +90,35 @@ class UserPresenterTest {
         thenErrorStateShouldBeEmitted()
     }
 
+    @Test
+    fun `observeTextChanges with empty query should emit empty state`() {
+        // Given setup
+
+        whenTextChangesIsObserved()
+
+        thenEmptyStateShouldBeEmitted()
+    }
+
     private fun givenOnSuccessAnswer() = doOnSuccessAnswer(FakeUserRepository.USER_SEARCH)
         .whenever(searchUser).invoke(any(), any(), any(), any())
 
     private fun givenOnErrorAnswer() = doOnErrorAnswer(Exception())
         .whenever(searchUser).invoke(any(), any(), any(), any())
 
-    private fun whenTextChangesIsObserved() = presenter.observeTextChanges(Observable.just("pew"))
+    private fun whenTextChangesIsObserved(query: String = "") =
+        presenter.observeTextChanges(Observable.just(query))
 
     private fun whenNextPageIsLoaded() = presenter.loadNextPage()
 
+    private fun thenEmptyStateShouldBeEmitted() = testObserver
+        .assertThatValueAt(0, State.Empty)
+        .assertThatValueAt(1, State.Empty)
+
     private fun thenSuccessStateShouldBeEmitted() = testObserver
-        .assertThatValueAt(0, State.Loading)
+        .assertThatValueAt(0, State.Empty)
         .assertThatValueAt(1, State.Success(expectedData))
 
     private fun thenErrorStateShouldBeEmitted() = testObserver
-        .assertThatValueAt(0, State.Loading)
+        .assertThatValueAt(0, State.Empty)
         .assertThatValueAt(1, State.Error())
 }

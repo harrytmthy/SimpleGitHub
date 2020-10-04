@@ -16,18 +16,20 @@
 
 package com.timothy.simplegithub.ui
 
+import androidx.lifecycle.LiveData
 import com.timothy.simplegithub.ui.model.UserModel
 import io.reactivex.rxjava3.core.Observable
 
 interface UserContract {
 
     sealed class State {
-        object Loading : State()
+        object Empty : State()
         data class Success(val data: List<UserModel>) : State()
         data class Error(val message: String = "") : State()
     }
 
     interface Presenter {
+        fun getState(): LiveData<State>
         fun observeTextChanges(textChangesObservable: Observable<String>)
         fun loadNextPage()
     }

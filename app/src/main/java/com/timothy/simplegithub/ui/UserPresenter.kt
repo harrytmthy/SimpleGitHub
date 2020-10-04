@@ -31,29 +31,32 @@ class UserPresenter @Inject constructor(
     private val searchUser: SearchUser
 ) : RxLifecycleAwarePresenter(), UserContract.Presenter {
 
-    private val state = MutableLiveData<State>(State.Loading)
+    private val state = MutableLiveData<State>(State.Empty)
 
     private var currentPage = 1
 
     private var currentQuery = ""
 
+    override fun getState() = state
+
     override fun observeTextChanges(textChangesObservable: Observable<String>) = launch {
-        textChangesObservable.subscribe(::searchUserByQuery)
+        textChangesObservable.subscribe(::validateQuery)
     }
 
-    private fun searchUserByQuery(query: String, page: Int = 1) = searchUser(
+    private fun validateQuery(query: String) = query.takeIf { it.isNotEmpty() }
+        ?.let(::searchUser)
+        ?: state.postValue(State.Empty)
+
+    private fun searchUser(query: String, page: Int = 1) = searchUser(
         params = SearchUser.Params(query, page),
         onSuccess = ::onSearchUserSuccess,
         onError = ::onSearchUserError
     ).also { currentQuery = query }
 
-    private fun onSearchUserSuccess(userSearch: UserSearch) {
-        state.value = State.Success(UserModel.from(userSearch))
-    }
+    private fun onSearchUserSuccess(userSearch: UserSearch) =
+        state.postValue(State.Success(UserModel.from(userSearch)))
 
-    private fun onSearchUserError(e: Throwable) {
-        state.value = State.Error(e.message.orEmpty())
-    }
+    private fun onSearchUserError(e: Throwable) = state.postValue(State.Error(e.message.orEmpty()))
 
-    override fun loadNextPage() = searchUserByQuery(currentQuery, ++currentPage)
+    override fun loadNextPage() = searchUser(currentQuery, ++currentPage)
 }

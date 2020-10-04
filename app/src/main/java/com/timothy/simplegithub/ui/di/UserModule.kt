@@ -14,16 +14,21 @@
  * limitations under the License.
  */
 
-package com.timothy.simplegithub.data.source.network
+package com.timothy.simplegithub.ui.di
 
-import com.timothy.simplegithub.data.constants.UrlConstants.API_SEARCH_USER
-import com.timothy.simplegithub.data.source.network.request.UserSearchRequest
-import com.timothy.simplegithub.data.source.network.response.UserSearchResponse
-import retrofit2.http.Body
-import retrofit2.http.GET
+import com.timothy.simplegithub.ui.UserContract
+import com.timothy.simplegithub.ui.UserPresenter
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.scopes.ActivityScoped
 
-interface UserSearchFacade {
+@InstallIn(ActivityComponent::class)
+@Module
+class UserModule {
 
-    @GET(API_SEARCH_USER)
-    fun searchUser(@Body request: UserSearchRequest): UserSearchResponse
+    @ActivityScoped
+    @Provides
+    fun providePresenter(presenter: UserPresenter): UserContract.Presenter = presenter
 }

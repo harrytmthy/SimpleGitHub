@@ -24,6 +24,7 @@ import com.jakewharton.rxbinding4.widget.textChanges
 import com.timothy.simplegithub.databinding.ViewUserSearchBinding
 import com.timothy.simplegithub.ui.ext.viewBinding
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Observable
 import java.util.concurrent.TimeUnit
 
 class UserSearchView @JvmOverloads constructor(
@@ -38,15 +39,13 @@ class UserSearchView @JvmOverloads constructor(
         ViewCompat.setElevation(this, DEFAULT_ELEVATION)
     }
 
-    fun getTextChangesObservable() = binding.searchTextView.textChanges()
+    fun getTextChangesObservable(): Observable<String> = binding.searchTextView.textChanges()
         .debounce(TEXT_CHANGES_DELAY, TimeUnit.MILLISECONDS)
-        .skip(SKIPPED_TEXT)
         .map { it.toString() }
         .observeOn(AndroidSchedulers.mainThread())
 
     companion object {
         private const val DEFAULT_ELEVATION = 16f
         private const val TEXT_CHANGES_DELAY = 500L
-        private const val SKIPPED_TEXT = 1L
     }
 }
