@@ -21,7 +21,7 @@ import com.timothy.simplegithub.data.source.network.request.UserSearchRequest
 
 interface UserDataSource {
 
-    fun searchUser(request: UserSearchRequest): UserSearchEntity
+    suspend fun searchUser(request: UserSearchRequest): UserSearchEntity
 
     fun cacheUserSearch(userSearch: UserSearchEntity) { /* default implementation */ }
 }

@@ -18,9 +18,15 @@ package com.timothy.simplegithub.data.constants
 
 object UrlConstants {
 
-    internal const val BASE_URL = "https://api.github.com"
+    const val BASE_URL = "https://api.github.com"
 
-    internal const val CONTENT_TYPE = "application/json"
+    const val CONTENT_TYPE = "application/json"
 
-    internal const val API_SEARCH_USER = "/search/users"
+    const val API_SEARCH_USER = "/search/users"
+
+    const val PARAM_QUERY = "q"
+
+    const val PARAM_PAGE_NUMBER = "page"
+
+    const val PARAM_PAGE_SIZE = "per_page"
 }

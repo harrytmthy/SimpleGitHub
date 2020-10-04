@@ -17,13 +17,19 @@
 package com.timothy.simplegithub.data.source.network
 
 import com.timothy.simplegithub.data.constants.UrlConstants.API_SEARCH_USER
-import com.timothy.simplegithub.data.source.network.request.UserSearchRequest
+import com.timothy.simplegithub.data.constants.UrlConstants.PARAM_PAGE_NUMBER
+import com.timothy.simplegithub.data.constants.UrlConstants.PARAM_PAGE_SIZE
+import com.timothy.simplegithub.data.constants.UrlConstants.PARAM_QUERY
 import com.timothy.simplegithub.data.source.network.response.UserSearchResponse
-import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface UserSearchFacade {
 
     @GET(API_SEARCH_USER)
-    fun searchUser(@Body request: UserSearchRequest): UserSearchResponse
+    suspend fun searchUser(
+        @Query(PARAM_QUERY) query: String,
+        @Query(PARAM_PAGE_NUMBER) pageNumber: Int,
+        @Query(PARAM_PAGE_SIZE) pageSize: Int
+    ): UserSearchResponse
 }

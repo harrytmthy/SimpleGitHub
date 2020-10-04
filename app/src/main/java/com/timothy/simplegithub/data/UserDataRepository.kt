@@ -43,7 +43,7 @@ class UserDataRepository @Inject constructor(
         }
     }.map { it.toUserSearch() }
 
-    private fun getUserSearchFromNetwork(request: UserSearchRequest) =
+    private suspend fun getUserSearchFromNetwork(request: UserSearchRequest) =
         networkUserDataSource.searchUser(request).also {
             localUserDataSource.cacheUserSearch(it)
         }

@@ -19,12 +19,12 @@ package com.timothy.simplegithub.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.Observer
+import com.google.android.material.snackbar.Snackbar
 import com.timothy.simplegithub.databinding.ActivityMainBinding
 import com.timothy.simplegithub.ui.UserContract.State
 import com.timothy.simplegithub.ui.ext.viewBinding
 import com.timothy.simplegithub.ui.model.UserModel
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -55,14 +55,14 @@ class MainActivity : AppCompatActivity(), UserContract.View {
     }
 
     private fun renderEmptyState() {
-        Timber.d("zzzzzzzzz: Empty")
+
     }
 
     private fun renderSuccessState(data: List<UserModel>) {
-        Timber.d("zzzzzzzzz: Success(size: ${data.size}")
+
     }
 
     private fun renderErrorState(message: String) {
-        Timber.d("zzzzzzzzz: Error(message: $message)")
+        Snackbar.make(window.decorView.rootView, message, Snackbar.LENGTH_SHORT).show()
     }
 }

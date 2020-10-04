@@ -26,7 +26,7 @@ class LocalUserDataSource @Inject constructor(
     private val database: AppDatabase
 ) : UserDataSource {
 
-    override fun searchUser(request: UserSearchRequest) = with (request) {
+    override suspend fun searchUser(request: UserSearchRequest) = with (request) {
         database.userSearchDao()
             .getUserSearchResult(query, pageNumber)
             .firstOrNull()

@@ -25,7 +25,7 @@ import com.timothy.simplegithub.data.model.UserSearchEntity
 @Dao
 interface UserSearchDao {
 
-    @Query("SELECT * FROM UserSearchEntity WHERE `query` MATCH :query AND page MATCH :page")
+    @Query("SELECT * FROM UserSearchEntity WHERE `query` = :query AND page = :page")
     fun getUserSearchResult(query: String, page: Int): List<UserSearchEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

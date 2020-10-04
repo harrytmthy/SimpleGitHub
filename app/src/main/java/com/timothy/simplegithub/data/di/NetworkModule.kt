@@ -47,8 +47,9 @@ class NetworkModule {
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
         .client(okHttpClient)
         .baseUrl(BASE_URL)
-        .addConverterFactory(Json.asConverterFactory(CONTENT_TYPE.toMediaType()))
-        .build()
+        .addConverterFactory(
+            Json { ignoreUnknownKeys = true }.asConverterFactory(CONTENT_TYPE.toMediaType())
+        ).build()
 
     @Provides
     @Singleton

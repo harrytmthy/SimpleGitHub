@@ -16,14 +16,10 @@
 
 package com.timothy.simplegithub.data.source.network.request
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
-
-@Serializable
 data class UserSearchRequest(
-    @SerialName("q") val query: String,
-    @SerialName("page") val pageNumber: Int = INITIAL_PAGE,
-    @SerialName("per_page") val pageSize: Int = DEFAULT_PAGE_SIZE
+    val query: String,
+    val pageNumber: Int = INITIAL_PAGE,
+    val pageSize: Int = DEFAULT_PAGE_SIZE
 ) {
 
     companion object {

@@ -24,6 +24,8 @@ class NetworkUserDataSource @Inject constructor(
     private val userSearchFacade: UserSearchFacade
 ) : UserDataSource {
 
-    override fun searchUser(request: UserSearchRequest) = userSearchFacade.searchUser(request)
-        .toUserEntity(request.query, request.pageNumber)
+    override suspend fun searchUser(request: UserSearchRequest) = with (request) {
+        userSearchFacade.searchUser(query, pageNumber, pageSize)
+            .toUserEntity(request.query, request.pageNumber)
+    }
 }
