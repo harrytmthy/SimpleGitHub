@@ -28,7 +28,7 @@ abstract class FlowUseCase<in P, R>(
     private val coroutineDispatcher: CoroutineDispatcher
 ) : CoroutineScope by CoroutineScope(coroutineDispatcher) {
 
-    protected abstract fun execute(params: P): Flow<Result<R>>
+    abstract fun execute(params: P): Flow<Result<R>>
 
     @JvmOverloads
     operator fun invoke(
