@@ -21,11 +21,5 @@ import com.timothy.simplegithub.data.source.network.request.UserSearchRequest
 
 class FakeUserDataSource(private val userSearchEntity: UserSearchEntity) : UserDataSource {
 
-    var userSearchCached = false
-
     override fun searchUser(request: UserSearchRequest) = userSearchEntity
-
-    override fun cacheUserSearch(userSearch: UserSearchEntity) {
-        userSearchCached = true
-    }
 }
