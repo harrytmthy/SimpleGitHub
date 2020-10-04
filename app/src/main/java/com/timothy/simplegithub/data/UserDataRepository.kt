@@ -35,7 +35,7 @@ class UserDataRepository @Inject constructor(
     override fun searchUser(query: String, page: Int) = flow {
         val request = UserSearchRequest(query, page)
         localUserDataSource.searchUser(request).run {
-            if (shouldLoadNewData()) {
+            if (shouldLoadFromNetwork()) {
                 emit(getUserSearchFromNetwork(request))
             } else {
                 emit(this)

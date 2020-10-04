@@ -33,8 +33,8 @@ data class UserSearchEntity(
     val result: List<UserEntity> = emptyList()
 ) {
 
-    fun shouldLoadNewData() =
-        DateTimeUtil.isPassedFiveMinutes(timestamp) || (result.isEmpty() && page == 1)
+    fun shouldLoadFromNetwork() =
+        DateTimeUtil.isPassedFiveMinutes(timestamp) || result.isEmpty()
 
     fun toUserSearch() = UserSearch(
         page = page,

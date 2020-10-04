@@ -42,12 +42,11 @@ abstract class UserDataRepositoryTestTemplate {
     private lateinit var searchResult: UserSearch
 
     protected fun givenUserDataRepository(
-        page: Int,
         localHasResult: Boolean,
         networkHasResult: Boolean,
         expiredTimestamp: Boolean = false
     ) {
-        request = UserSearchRequest("test", page)
+        request = UserSearchRequest("test", 1)
         localResult = getUserSearchEntity(localHasResult, expiredTimestamp)
         networkResult = getUserSearchEntity(networkHasResult)
         userDataRepository = UserDataRepository(
@@ -77,7 +76,7 @@ abstract class UserDataRepositoryTestTemplate {
             query = query,
             page = pageNumber,
             timestamp = 0L,
-            result = getUserEntities()
+            result = getExpiredUserEntities()
         )
     }
 
@@ -100,5 +99,10 @@ abstract class UserDataRepositoryTestTemplate {
         UserEntity("http://img.com/1.jpg", "pewds"),
         UserEntity("http://img.com/2.jpg", "toast"),
         UserEntity("http://img.com/3.jpg", "valkyrae")
+    )
+
+    private fun getExpiredUserEntities() = listOf(
+        UserEntity("http://img.com/1.jpg", "pewds"),
+        UserEntity("http://img.com/2.jpg", "toast")
     )
 }

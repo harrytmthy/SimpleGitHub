@@ -22,9 +22,8 @@ import org.junit.Test
 class UserDataRepositoryTest : UserDataRepositoryTestTemplate() {
 
     @Test
-    fun `searchUser without local result should get data from network`() = runBlockingTest {
+    fun `searchUser without local result should return data from network`() = runBlockingTest {
         givenUserDataRepository(
-            page = 1,
             localHasResult = false,
             networkHasResult = true
         )
@@ -35,9 +34,21 @@ class UserDataRepositoryTest : UserDataRepositoryTestTemplate() {
     }
 
     @Test
-    fun `searchUser with local result should get data from local`() = runBlockingTest {
+    fun `searchUser without local on expired timestamp result should return data from network`() = runBlockingTest {
         givenUserDataRepository(
-            page = 1,
+            localHasResult = false,
+            networkHasResult = true,
+            expiredTimestamp = true
+        )
+
+        whenSearchUserIsCalled()
+
+        thenSearchResultShouldBeEqualTo(networkResult.toUserSearch())
+    }
+
+    @Test
+    fun `searchUser with local result should return data from local`() = runBlockingTest {
+        givenUserDataRepository(
             localHasResult = true,
             networkHasResult = false
         )
@@ -48,22 +59,8 @@ class UserDataRepositoryTest : UserDataRepositoryTestTemplate() {
     }
 
     @Test
-    fun `searchUser with local result and paging should get data from local`() = runBlockingTest {
+    fun `searchUser with local result and expired Timestamp should return data from network`() = runBlockingTest {
         givenUserDataRepository(
-            page = 2,
-            localHasResult = true,
-            networkHasResult = false
-        )
-
-        whenSearchUserIsCalled()
-
-        thenSearchResultShouldBeEqualTo(localResult.toUserSearch())
-    }
-
-    @Test
-    fun `searchUser with local result and expired Timestamp should get data from network`() = runBlockingTest {
-        givenUserDataRepository(
-            page = 1,
             localHasResult = true,
             networkHasResult = true,
             expiredTimestamp = true
