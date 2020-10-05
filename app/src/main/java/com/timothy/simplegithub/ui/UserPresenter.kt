@@ -47,24 +47,28 @@ class UserPresenter @Inject constructor(
         ?.let(::searchUser)
         ?: state.postValue(State.Empty)
 
-    private fun searchUser(query: String, page: Int = 1) = searchUser(
-        params = SearchUser.Params(query, page),
+    private fun searchUser(query: String) = searchUser(
+        params = SearchUser.Params(query, 1),
         onSuccess = ::onSearchUserSuccess,
-        onError = ::onSearchUserError
+        onError = ::onError
     ).also {
         currentQuery = query
         currentPage = 1
     }
 
-    private fun onSearchUserSuccess(userSearch: UserSearch) {
-        if (currentPage == 1) {
-            state.postValue(State.SearchSuccess(UserModel.from(userSearch)))
-        } else {
-            state.postValue(State.NextPage(UserModel.from(userSearch)))
-        }
-    }
+    private fun searchUserNextPage(query: String, page: Int) = searchUser(
+        params = SearchUser.Params(query, page),
+        onSuccess = ::onNextPage,
+        onError = ::onError
+    )
 
-    private fun onSearchUserError(e: Throwable) = state.postValue(State.Error(e.message.orEmpty()))
+    private fun onSearchUserSuccess(userSearch: UserSearch) =
+        state.postValue(State.SearchSuccess(UserModel.from(userSearch)))
 
-    override fun loadNextPage() = searchUser(currentQuery, ++currentPage)
+    private fun onNextPage(userSearch: UserSearch) =
+        state.postValue(State.NextPage(UserModel.from(userSearch)))
+
+    private fun onError(e: Throwable) = state.postValue(State.Error(e.message.orEmpty()))
+
+    override fun loadNextPage() = searchUserNextPage(currentQuery, ++currentPage)
 }
