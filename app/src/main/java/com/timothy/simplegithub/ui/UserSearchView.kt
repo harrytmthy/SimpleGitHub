@@ -35,17 +35,12 @@ class UserSearchView @JvmOverloads constructor(
 
     private val binding by viewBinding(ViewUserSearchBinding::inflate)
 
-    init {
-        ViewCompat.setElevation(this, DEFAULT_ELEVATION)
-    }
-
     fun getTextChangesObservable(): Observable<String> = binding.searchTextView.textChanges()
         .debounce(TEXT_CHANGES_DELAY, TimeUnit.MILLISECONDS)
         .map { it.toString() }
         .observeOn(AndroidSchedulers.mainThread())
 
     companion object {
-        private const val DEFAULT_ELEVATION = 16f
         private const val TEXT_CHANGES_DELAY = 500L
     }
 }

@@ -14,12 +14,19 @@
  * limitations under the License.
  */
 
-package com.timothy.simplegithub.data.source
+package com.timothy.simplegithub.ui.viewholder
 
-import com.timothy.simplegithub.data.model.UserSearchEntity
-import com.timothy.simplegithub.data.source.network.request.UserSearchRequest
+import androidx.recyclerview.widget.RecyclerView
+import com.timothy.simplegithub.databinding.ItemUserCardBinding
+import com.timothy.simplegithub.ui.ext.loadUrl
+import com.timothy.simplegithub.ui.model.UserModel
 
-class FakeUserDataSource(private val userSearchEntity: UserSearchEntity) : UserDataSource {
+class UserViewHolder(
+    private val binding: ItemUserCardBinding
+) : RecyclerView.ViewHolder(binding.root) {
 
-    override suspend fun searchUser(request: UserSearchRequest) = userSearchEntity
+    fun bindData(user: UserModel) = with (binding) {
+        avatar.loadUrl(user.avatarUrl)
+        username.text = user.username
+    }
 }

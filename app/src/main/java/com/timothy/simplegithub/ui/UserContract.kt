@@ -24,7 +24,8 @@ interface UserContract {
 
     sealed class State {
         object Empty : State()
-        data class Success(val data: List<UserModel>) : State()
+        data class SearchSuccess(val data: List<UserModel>) : State()
+        data class NextPage(val data: List<UserModel>) : State()
         data class Error(val message: String = "") : State()
     }
 

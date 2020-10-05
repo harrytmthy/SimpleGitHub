@@ -22,6 +22,7 @@ import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
 import com.timothy.simplegithub.databinding.ActivityMainBinding
 import com.timothy.simplegithub.ui.UserContract.State
+import com.timothy.simplegithub.ui.adapter.UserAdapter
 import com.timothy.simplegithub.ui.ext.viewBinding
 import com.timothy.simplegithub.ui.model.UserModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,13 +34,20 @@ class MainActivity : AppCompatActivity(), UserContract.View {
     @Inject
     lateinit var presenter: UserContract.Presenter
 
+    private lateinit var adapter: UserAdapter
+
     private val binding by viewBinding(ActivityMainBinding::inflate)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        setupAdapter()
         observeState()
         observeTextChanges()
+    }
+
+    private fun setupAdapter() {
+        adapter = UserAdapter().also { binding.userRecyclerView.adapter = it }
     }
 
     private fun observeState() = presenter.getState().observe(this, Observer(::render))
@@ -50,19 +58,18 @@ class MainActivity : AppCompatActivity(), UserContract.View {
 
     override fun render(state: State) = when (state) {
         is State.Empty -> renderEmptyState()
-        is State.Success -> renderSuccessState(state.data)
+        is State.SearchSuccess -> renderSuccessState(state.data)
+        is State.NextPage -> renderNextPageState(state.data)
         is State.Error -> renderErrorState(state.message)
     }
 
-    private fun renderEmptyState() {
+    private fun renderEmptyState() = adapter.removeAllUsers()
 
-    }
+    private fun renderSuccessState(users: List<UserModel>) = adapter.setUsers(users)
+        .also { binding.userRecyclerView.scrollToPosition(0) }
 
-    private fun renderSuccessState(data: List<UserModel>) {
+    private fun renderNextPageState(users: List<UserModel>) = adapter.addUsers(users)
 
-    }
-
-    private fun renderErrorState(message: String) {
-        Snackbar.make(window.decorView.rootView, message, Snackbar.LENGTH_SHORT).show()
-    }
+    private fun renderErrorState(message: String) =
+        Snackbar.make(window.decorView, message, Snackbar.LENGTH_SHORT).show()
 }

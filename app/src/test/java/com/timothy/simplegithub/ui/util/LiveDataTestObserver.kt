@@ -22,14 +22,13 @@ import org.hamcrest.core.IsEqual
 
 class LiveDataTestObserver<T> : Observer<T> {
 
-    private val histories = mutableListOf<T>()
+    private var emittedValue: T? = null
 
     override fun onChanged(value: T) {
-        histories.add(value)
+        emittedValue = value
     }
 
-    fun assertThatValueAt(index: Int, expectedValue: T): LiveDataTestObserver<T> {
-        assertThat(histories[index], IsEqual(expectedValue))
-        return this
+    fun assertThatEmittedValueEquals(expectedValue: T) {
+        assertThat(emittedValue, IsEqual(expectedValue))
     }
 }

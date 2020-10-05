@@ -78,7 +78,7 @@ class UserPresenterTest {
 
         whenNextPageIsLoaded()
 
-        thenSuccessStateShouldBeEmitted()
+        thenNextPageStateShouldBeEmitted()
     }
 
     @Test
@@ -110,15 +110,15 @@ class UserPresenterTest {
 
     private fun whenNextPageIsLoaded() = presenter.loadNextPage()
 
-    private fun thenEmptyStateShouldBeEmitted() = testObserver
-        .assertThatValueAt(0, State.Empty)
-        .assertThatValueAt(1, State.Empty)
+    private fun thenEmptyStateShouldBeEmitted() =
+        testObserver.assertThatEmittedValueEquals(State.Empty)
 
-    private fun thenSuccessStateShouldBeEmitted() = testObserver
-        .assertThatValueAt(0, State.Empty)
-        .assertThatValueAt(1, State.Success(expectedData))
+    private fun thenSuccessStateShouldBeEmitted() =
+        testObserver.assertThatEmittedValueEquals(State.SearchSuccess(expectedData))
 
-    private fun thenErrorStateShouldBeEmitted() = testObserver
-        .assertThatValueAt(0, State.Empty)
-        .assertThatValueAt(1, State.Error())
+    private fun thenNextPageStateShouldBeEmitted() =
+        testObserver.assertThatEmittedValueEquals(State.NextPage(expectedData))
+
+    private fun thenErrorStateShouldBeEmitted() =
+        testObserver.assertThatEmittedValueEquals(State.Error())
 }

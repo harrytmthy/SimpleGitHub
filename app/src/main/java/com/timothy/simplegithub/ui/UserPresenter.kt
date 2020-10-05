@@ -31,7 +31,7 @@ class UserPresenter @Inject constructor(
     private val searchUser: SearchUser
 ) : RxLifecycleAwarePresenter(), UserContract.Presenter {
 
-    private val state = MutableLiveData<State>(State.Empty)
+    private val state = MutableLiveData<State>()
 
     private var currentPage = 1
 
@@ -53,8 +53,13 @@ class UserPresenter @Inject constructor(
         onError = ::onSearchUserError
     ).also { currentQuery = query }
 
-    private fun onSearchUserSuccess(userSearch: UserSearch) =
-        state.postValue(State.Success(UserModel.from(userSearch)))
+    private fun onSearchUserSuccess(userSearch: UserSearch) {
+        if (currentPage == 1) {
+            state.postValue(State.SearchSuccess(UserModel.from(userSearch)))
+        } else {
+            state.postValue(State.NextPage(UserModel.from(userSearch)))
+        }
+    }
 
     private fun onSearchUserError(e: Throwable) = state.postValue(State.Error(e.message.orEmpty()))
 

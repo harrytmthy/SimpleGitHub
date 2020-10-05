@@ -29,10 +29,12 @@ class LocalUserDataSource @Inject constructor(
     override suspend fun searchUser(request: UserSearchRequest) = with (request) {
         database.userSearchDao()
             .getUserSearchResult(query, pageNumber)
-            .firstOrNull()
+            .lastOrNull()
             ?: UserSearchEntity(query, pageNumber)
     }
 
-    override fun cacheUserSearch(userSearch: UserSearchEntity) =
+    override fun cacheUserSearch(userSearch: UserSearchEntity) {
+        database.userSearchDao().delete(userSearch.query, userSearch.page)
         database.userSearchDao().insert(userSearch)
+    }
 }

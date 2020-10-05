@@ -28,6 +28,9 @@ interface UserSearchDao {
     @Query("SELECT * FROM UserSearchEntity WHERE `query` = :query AND page = :page")
     fun getUserSearchResult(query: String, page: Int): List<UserSearchEntity>
 
+    @Query("DELETE FROM UserSearchEntity WHERE `query` = :query AND page = :page")
+    fun delete(query: String, page: Int)
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(userSearch: UserSearchEntity)
 }
