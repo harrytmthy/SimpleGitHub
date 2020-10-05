@@ -18,7 +18,7 @@ package com.timothy.simplegithub.ui.ext
 
 import android.widget.ImageView
 import com.timothy.simplegithub.R
-import com.timothy.simplegithub.ui.util.GlideApp
+import com.timothy.simplegithub.ui.common.GlideApp
 
 fun ImageView.loadUrl(url: String) = GlideApp.with(context)
     .load(url)
