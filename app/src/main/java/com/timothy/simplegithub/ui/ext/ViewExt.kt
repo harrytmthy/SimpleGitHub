@@ -14,21 +14,13 @@
  * limitations under the License.
  */
 
-package com.timothy.simplegithub.common
+package com.timothy.simplegithub.ui.ext
 
-import androidx.lifecycle.ViewModel
-import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.disposables.Disposable
+import android.widget.ImageView
+import com.timothy.simplegithub.R
+import com.timothy.simplegithub.ui.util.GlideApp
 
-abstract class RxLifecycleAwarePresenter : ViewModel() {
-
-    private val disposables = CompositeDisposable()
-
-    protected fun launch(action: () -> Disposable) {
-        disposables.add(action())
-    }
-
-    override fun onCleared() {
-        disposables.clear()
-    }
-}
+fun ImageView.loadUrl(url: String) = GlideApp.with(context)
+    .load(url)
+    .error(R.drawable.ic_default_avatar)
+    .into(this)

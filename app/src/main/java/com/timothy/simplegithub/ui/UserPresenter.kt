@@ -17,7 +17,7 @@
 package com.timothy.simplegithub.ui
 
 import androidx.lifecycle.MutableLiveData
-import com.timothy.simplegithub.common.RxLifecycleAwarePresenter
+import com.timothy.simplegithub.ui.common.RxLifecycleAwarePresenter
 import com.timothy.simplegithub.domain.interactor.SearchUser
 import com.timothy.simplegithub.domain.model.UserSearch
 import com.timothy.simplegithub.ui.UserContract.State
