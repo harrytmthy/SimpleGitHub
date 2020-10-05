@@ -51,7 +51,10 @@ class UserPresenter @Inject constructor(
         params = SearchUser.Params(query, page),
         onSuccess = ::onSearchUserSuccess,
         onError = ::onSearchUserError
-    ).also { currentQuery = query }
+    ).also {
+        currentQuery = query
+        currentPage = 1
+    }
 
     private fun onSearchUserSuccess(userSearch: UserSearch) {
         if (currentPage == 1) {

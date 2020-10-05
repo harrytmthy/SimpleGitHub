@@ -18,11 +18,13 @@ package com.timothy.simplegithub.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
 import com.timothy.simplegithub.databinding.ActivityMainBinding
 import com.timothy.simplegithub.ui.UserContract.State
 import com.timothy.simplegithub.ui.adapter.UserAdapter
+import com.timothy.simplegithub.ui.ext.addOnNextPageListener
 import com.timothy.simplegithub.ui.ext.viewBinding
 import com.timothy.simplegithub.ui.model.UserModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,6 +44,7 @@ class MainActivity : AppCompatActivity(), UserContract.View {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setupAdapter()
+        setupEndlessScroll()
         observeState()
         observeTextChanges()
     }
@@ -49,6 +52,16 @@ class MainActivity : AppCompatActivity(), UserContract.View {
     private fun setupAdapter() {
         adapter = UserAdapter().also { binding.userRecyclerView.adapter = it }
     }
+
+    private fun setupEndlessScroll() = binding.userRecyclerView.addOnNextPageListener {
+        presenter.getState().value?.let {
+            if (!isPagingDataEmpty(it)) {
+                presenter.loadNextPage()
+            }
+        }
+    }
+
+    private fun isPagingDataEmpty(state: State) = state is State.NextPage && state.data.isEmpty()
 
     private fun observeState() = presenter.getState().observe(this, Observer(::render))
 
@@ -63,10 +76,23 @@ class MainActivity : AppCompatActivity(), UserContract.View {
         is State.Error -> renderErrorState(state.message)
     }
 
-    private fun renderEmptyState() = adapter.removeAllUsers()
+    private fun renderEmptyState() = with (binding) {
+        userRecyclerView.visibility = View.GONE
+        noResultView.root.visibility = View.GONE
+        adapter.removeAllUsers()
+    }
 
-    private fun renderSuccessState(users: List<UserModel>) = adapter.setUsers(users)
-        .also { binding.userRecyclerView.scrollToPosition(0) }
+    private fun renderSuccessState(users: List<UserModel>) = with (binding) {
+        if (users.isNotEmpty()) {
+            userRecyclerView.visibility = View.VISIBLE
+            noResultView.root.visibility = View.GONE
+        } else {
+            noResultView.root.visibility = View.VISIBLE
+            userRecyclerView.visibility = View.GONE
+        }
+        adapter.setUsers(users)
+        binding.userRecyclerView.scrollToPosition(0)
+    }
 
     private fun renderNextPageState(users: List<UserModel>) = adapter.addUsers(users)
 

@@ -17,6 +17,8 @@
 package com.timothy.simplegithub.ui.ext
 
 import android.widget.ImageView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.timothy.simplegithub.R
 import com.timothy.simplegithub.ui.common.GlideApp
 
@@ -24,3 +26,18 @@ fun ImageView.loadUrl(url: String) = GlideApp.with(context)
     .load(url)
     .error(R.drawable.ic_default_avatar)
     .into(this)
+
+fun RecyclerView.addOnNextPageListener(block: () -> Unit) = addOnScrollListener(
+    object : RecyclerView.OnScrollListener() {
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            super.onScrollStateChanged(recyclerView, newState)
+            if (isScrolledToLast()) {
+                block()
+            }
+        }
+    }
+)
+
+private fun RecyclerView.isScrolledToLast() = (layoutManager as? LinearLayoutManager)?.run {
+    findLastVisibleItemPosition() == itemCount - 1
+} ?: false
