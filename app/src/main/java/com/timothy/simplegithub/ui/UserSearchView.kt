@@ -19,7 +19,6 @@ package com.timothy.simplegithub.ui
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.FrameLayout
-import androidx.core.view.ViewCompat
 import com.jakewharton.rxbinding4.widget.textChanges
 import com.timothy.simplegithub.databinding.ViewUserSearchBinding
 import com.timothy.simplegithub.ui.ext.viewBinding

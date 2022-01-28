@@ -19,23 +19,23 @@ import Dependencies.DEPENDENCIES
 plugins {
     id("com.android.application")
     kotlin("android")
-    kotlin("android.extensions")
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
     id("kotlin-android")
+    id("kotlin-parcelize")
     id("kotlinx-serialization")
 }
 
 android {
-    compileSdkVersion(Versions.COMPILE_SDK)
+    compileSdk = Versions.COMPILE_SDK
 
     defaultConfig {
         applicationId = "com.timothy.simplegithub"
-        minSdkVersion(Versions.MIN_SDK)
-        targetSdkVersion(Versions.TARGET_SDK)
+        minSdk = Versions.MIN_SDK
+        targetSdk = Versions.TARGET_SDK
         versionCode = Versions.APP_VERSION_CODE
         versionName = Versions.APP_VERSION_NAME
-        buildToolsVersion(Versions.BUILD_TOOLS)
+        buildToolsVersion = Versions.BUILD_TOOLS
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         vectorDrawables.useSupportLibrary = true
@@ -63,24 +63,23 @@ android {
         viewBinding = true
     }
 
-    lintOptions {
-        isCheckGeneratedSources = true
-        isCheckReleaseBuilds = false
+    lint {
+        checkGeneratedSources = true
+        checkReleaseBuilds = false
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
 }
 
 dependencies {
     api(platform(project(":depconstraints")))
-    implementation("androidx.appcompat:appcompat:1.2.0")
     kapt(platform(project(":depconstraints")))
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementAll(DEPENDENCIES)
